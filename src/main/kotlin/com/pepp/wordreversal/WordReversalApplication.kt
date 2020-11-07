@@ -1,4 +1,4 @@
-package com.pepp.wordreversal.WordReversal
+package com.pepp.wordreversal
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication
