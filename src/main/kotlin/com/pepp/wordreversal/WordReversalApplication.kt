@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class WordReversalApplication
 
 fun main(args: Array<String>) {
-	runApplication<WordReversalApplication>(*args)
+    runApplication<WordReversalApplication>(*args)
 }

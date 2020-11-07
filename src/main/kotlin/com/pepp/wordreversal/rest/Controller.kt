@@ -1,7 +1,9 @@
 package com.pepp.wordreversal.rest
 
 import com.pepp.wordreversal.service.WordReversalService
-import org.springframework.web.bind.annotation.*
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
 class Controller(
@@ -9,7 +11,7 @@ class Controller(
 ) {
 
     @PostMapping("/reversal")
-    fun greeting(@RequestBody input: String): String {
+    fun wordReversal(@RequestBody input: String): String {
         return wordReversalService.reverseWords(input)
     }
 }

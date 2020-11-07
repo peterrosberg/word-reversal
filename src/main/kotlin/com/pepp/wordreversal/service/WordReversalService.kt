@@ -13,7 +13,7 @@ class WordReversalService {
         val words = input.split(characters)
                 .map { it.reversed() }
 
-        val delimiters =  input.split(letters)
+        val delimiters = input.split(letters)
                 .filter { it.isNotEmpty() }
 
         return zip(input, words, delimiters)
@@ -37,7 +37,7 @@ class WordReversalService {
     private fun joinOddListsToString(list1: List<String>, list2: List<String>) =
             joinEvenListsToString(list1, list2).plus(list1.last())
 
-    private fun joinEvenListsToString(list1: List<String>, list2: List<String>) : String =
+    private fun joinEvenListsToString(list1: List<String>, list2: List<String>): String =
             list1.zip(list2).joinToString(separator = "") { "${it.first}${it.second}" }
 
     private fun startsWithWord(input: String) = letters.matches(input.subSequence(0..1))
