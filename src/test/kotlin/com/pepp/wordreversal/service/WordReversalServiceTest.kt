@@ -31,8 +31,8 @@ class WordReversalServiceTest {
     @Test
     fun `Reverses a sentence starting with odd characters correctly`() {
 
-        val result = service.reverseWords("!!!Hello, this is dog!")
-        assertThat(result).isEqualTo("!!!olleH, siht si god!")
+        val result = service.reverseWords("¿Hello, this is dog?")
+        assertThat(result).isEqualTo("¿olleH, siht si god?")
     }
 
     @Test

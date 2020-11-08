@@ -5,40 +5,32 @@ import org.springframework.stereotype.Service
 @Service
 class WordReversalService {
 
-    private val letters = "[A-Za-zÅÄÖåäö]+".toRegex()
-    private val characters = "[^A-Za-zÅÄÖåäö]+".toRegex()
+    private val lettersPattern = "[A-Za-zÅÄÖåäö]+".toRegex()
+    private val nonLettersPattern = "[^A-Za-zÅÄÖåäö]+".toRegex()
 
     fun reverseWords(input: String): String {
 
-        val words = input.split(characters)
+        val words = input.split(nonLettersPattern)
+                .filter { it.isNotEmpty() }
                 .map { it.reversed() }
 
-        val delimiters = input.split(letters)
+        val nonWords = input.split(lettersPattern)
                 .filter { it.isNotEmpty() }
 
-        return zip(input, words, delimiters)
-    }
-
-
-    private fun zip(input: String, words: List<String>, delimiters: List<String>): String {
-        return if (words.size > delimiters.size) {
-            joinOddListsToString(words, delimiters)
-        } else if (delimiters.size > words.size) {
-            joinOddListsToString(delimiters, words)
+        return if (startsWithWord(input)) {
+            zipListsToString(words, nonWords)
         } else {
-            if (startsWithWord(input)) {
-                joinEvenListsToString(words, delimiters)
-            } else {
-                joinEvenListsToString(delimiters, words)
-            }
+            zipListsToString(nonWords, words)
         }
     }
 
-    private fun joinOddListsToString(list1: List<String>, list2: List<String>) =
-            joinEvenListsToString(list1, list2).plus(list1.last())
+    private fun zipListsToString(list1: List<String>, list2: List<String>): String {
+        val result = list1.zip(list2).joinToString(separator = "") { "${it.first}${it.second}" }
+        return if (list1.size > list2.size)
+            result.plus(list1.last())
+        else
+            result
+    }
 
-    private fun joinEvenListsToString(list1: List<String>, list2: List<String>): String =
-            list1.zip(list2).joinToString(separator = "") { "${it.first}${it.second}" }
-
-    private fun startsWithWord(input: String) = letters.matches(input.subSequence(0..1))
+    private fun startsWithWord(input: String) = lettersPattern.matches(input.subSequence(0..0))
 }
