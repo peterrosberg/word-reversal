@@ -10,6 +10,10 @@ class WordReversalService {
 
     fun reverseWords(input: String): String {
 
+        if(input.isEmpty()) {
+            return ""
+        }
+
         val words = input.split(nonLettersPattern)
                 .filter { it.isNotEmpty() }
                 .map { it.reversed() }

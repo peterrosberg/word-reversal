@@ -8,6 +8,13 @@ class WordReversalServiceTest {
     private val service: WordReversalService = WordReversalService()
 
     @Test
+    fun `Handle empty string`() {
+
+        val result = service.reverseWords("")
+        assertThat(result).isEqualTo("")
+    }
+
+    @Test
     fun `Reverses a basic word correctly`() {
 
         val result = service.reverseWords("Hello")
