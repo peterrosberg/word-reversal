@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import { Reversal } from './features/reversal/Reversal';
 import './App.css';
 

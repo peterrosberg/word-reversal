@@ -16,6 +16,8 @@ repositories {
 }
 
 dependencies {
+	implementation(project(":frontend"))
+
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 
