@@ -16,7 +16,7 @@ export function Reversal() {
     return (
         <div>
             <div className={styles.container}>
-                <textarea id="w3review" name="w3review" rows="4" cols="50" className={styles.textbox}
+                <textarea id="w3review" name="w3review" rows="4" cols="40" className={styles.textbox}
                     value={sentence}
                     placeholder="Enter sentence here..."
                     onChange={e => setSentence(e.target.value)}
