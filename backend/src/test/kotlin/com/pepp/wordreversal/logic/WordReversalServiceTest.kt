@@ -1,5 +1,6 @@
-package com.pepp.wordreversal.service
+package com.pepp.wordreversal.logic
 
+import com.pepp.wordreversal.logic.WordReversalService
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 

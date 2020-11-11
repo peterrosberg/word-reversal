@@ -2,7 +2,7 @@ package com.pepp.wordreversal.rest
 
 import com.pepp.wordreversal.model.ReversalInput
 import com.pepp.wordreversal.model.ReversalResult
-import com.pepp.wordreversal.service.WordReversalService
+import com.pepp.wordreversal.logic.WordReversalService
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping

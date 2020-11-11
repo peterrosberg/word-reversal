@@ -1,4 +1,4 @@
-package com.pepp.wordreversal.service
+package com.pepp.wordreversal.logic
 
 import org.springframework.stereotype.Service
 

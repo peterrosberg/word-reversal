@@ -1,2 +1,10 @@
+spring:
+  application:
+    name: word-reversal-backend
+  profiles:
+    active: ${ENVIRONMENT:stage}
+  main:
+    banner-mode: "off"
+
 server:
   port : ${PORT:8080}
