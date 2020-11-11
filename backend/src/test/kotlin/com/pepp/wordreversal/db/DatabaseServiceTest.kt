@@ -47,7 +47,6 @@ class DatabaseServiceTest {
 
         val entities = (1..5).map { ReversalEntity(it.toString(), it.toString()) }
                 .map { databaseService.save(it) }
-                .toList()
 
         val result = databaseService.getLatest()
 

@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-	implementation(project(":frontend"))
+	//implementation(project(":frontend"))
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
@@ -35,6 +35,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}
+
+	testImplementation("io.mockk:mockk:1.9.3")
 }
 
 tasks.withType<Test> {

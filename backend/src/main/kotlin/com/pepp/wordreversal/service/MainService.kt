@@ -1,6 +1,7 @@
 package com.pepp.wordreversal.service
 
 import com.pepp.wordreversal.db.DatabaseService
+import com.pepp.wordreversal.db.ReversalEntity
 import com.pepp.wordreversal.logic.WordReversalService
 import com.pepp.wordreversal.model.ReversalInput
 import com.pepp.wordreversal.model.ReversalResult
@@ -13,11 +14,16 @@ class MainService(
 ) {
 
     fun reverseWords(input: ReversalInput) : ReversalResult {
-        return ReversalResult("")
+
+        val result = wordReversalService.reverseWords(input.sentence)
+
+        databaseService.save(ReversalEntity(input.sentence, result))
+
+        return ReversalResult(result)
     }
 
     fun getLastReversals(): List<String> {
-        return emptyList()
+        return databaseService.getLatest().map { it.result }
     }
 
 }
