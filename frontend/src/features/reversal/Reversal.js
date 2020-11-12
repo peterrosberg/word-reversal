@@ -14,7 +14,7 @@ export function Reversal() {
     const [sentence, setSentence] = useState('');
 
     return (
-        <div>
+        <div className={styles.box}>
             <div className={styles.container}>
                 <textarea id="w3review" name="w3review" rows="4" cols="40" className={styles.textbox}
                     value={sentence}

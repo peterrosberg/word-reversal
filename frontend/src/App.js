@@ -1,5 +1,6 @@
 import React from 'react';
 import { Reversal } from './features/reversal/Reversal';
+import { History } from './features/history/History';
 import './App.css';
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
         <h1>Wordsmith inc.</h1>
         <p>Reverse the words of any sentence</p>
         <Reversal />
+        <History />
       </header>
     </div>
   );
