@@ -9,6 +9,8 @@ plugins {
 	id("org.jetbrains.kotlin.plugin.noarg") version "1.3.72"
 }
 
+apply(file("gradle/heroku/stage.gradle"))
+
 group = "com.pepp.wordreversal"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -48,4 +50,14 @@ tasks.withType<KotlinCompile> {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
 		jvmTarget = "11"
 	}
+}
+
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+	into("static") {
+		from("frontend/build")
+	}
+}
+
+tasks.getByName<org.springframework.boot.gradle.tasks.bundling.BootJar>("bootJar") {
+	dependsOn("frontend:bundle")
 }

@@ -1,3 +1,3 @@
 rootProject.name = "WordReversal"
 
-include(":frontend", ":backend")
+include(":frontend")

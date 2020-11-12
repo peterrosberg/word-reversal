@@ -6,23 +6,30 @@ apply plugin: "com.moowork.node"
 
 node {
     version = "14.13.0"
+    //download = true
 }
-task bundle(type: NpmTask, dependsOn: npmInstall) {
+
+task bundle(type: NpmTask) {
+    inputs.files(fileTree('node_modules'))
+    inputs.files(fileTree('src'))
+    inputs.files(fileTree('public'))
+    inputs.file('package.json')
+
+    outputs.dir('build')
+
+    dependsOn npmInstall
     args = ['run', 'build']
 }
-task uiTest(type: NpmTask) {
-    environment = ['CI': 'true']
-    args = ['run', 'test']
-}
-task run(type: NpmTask) {
+
+task start(type: NpmTask) {
+    dependsOn npmInstall
     args = ['start']
 }
 
-task webjar(type: Jar) {
-    from(fileTree("build")) {
-        into "META-INF/resources"
+task uiTest(type: NpmTask) {
+    dependsOn npmInstall
+    args = ['test']
+    execOverrides {
+        it.environment "CI", "true"
     }
 }
-check.dependsOn(test)
-jar.dependsOn(bundle)
-jar.finalizedBy('webjar')
