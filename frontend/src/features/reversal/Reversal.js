@@ -16,19 +16,19 @@ export function Reversal() {
     return (
         <div className={styles.box}>
             <div className={styles.container}>
-                <textarea id="w3review" name="w3review" rows="4" cols="40" className={styles.textbox}
+                <textarea id="sentenceInput" name="sentenceInput" rows="4" cols="40" className={styles.textbox}
                     value={sentence}
                     placeholder="Enter sentence here..."
                     onChange={e => setSentence(e.target.value)}
                 />
             </div>
             <div className={styles.container}>
-                <button className={styles.button}
+                <button id="postSentence" className={styles.button}
                     onClick={() => dispatch(reverseSentence(sentence || "")) }>
                     Reverse it!
                 </button>
             </div>
-            <div className={`${styles.container} ${styles[reversedTextClass]}`}>
+            <div id="result" className={`${styles.container} ${styles[reversedTextClass]}`}>
                 {reversedText}
             </div>
         </div>

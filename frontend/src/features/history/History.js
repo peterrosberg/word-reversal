@@ -15,15 +15,15 @@ export function History() {
     const historyList = useSelector(history);
 
     if (!loaded) {
-        return <div className={styles.loading}>Loading history...</div>
+        return <div id="latestSentences" className={styles.loading}>Loading history...</div>
     }
 
     if (error) {
-        return <div className={styles.error}>Error loading history: {errorText}</div>
+        return <div id="latestSentences" className={styles.error}>Error loading history: {errorText}</div>
     }
 
     return (
-        <div>
+        <div id="latestSentences">
             {historyList.map((element, index) => (<div key={index}>{element}</div>))}
         </div>
     );
