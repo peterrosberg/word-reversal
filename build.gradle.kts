@@ -9,8 +9,6 @@ plugins {
 	id("org.jetbrains.kotlin.plugin.noarg") version "1.3.72"
 }
 
-apply(file("gradle/heroku/stage.gradle"))
-
 group = "com.pepp.wordreversal"
 version = "0.0.1-SNAPSHOT"
 java.sourceCompatibility = JavaVersion.VERSION_11

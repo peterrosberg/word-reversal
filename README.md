@@ -3,7 +3,7 @@
 ## Requirements
 
 To develop and run locally you will need:
-* Java JDK version 11
+* Java JDK version 11 //TODO or 14?
 * Node.js version 14.13.0 or later
 * Npm version 6.14.8 or later
 * Gradle
@@ -17,10 +17,16 @@ For deployment you also need:
 
 ## Test
 
+### Unit and integration tests
 Run the test suite from your terminal by:
 ```
 ./gradlew test 
 ```
+
+### Selenium test
+
+First you need to install the selenium chrome driver on your system. 
+Instructions for that is available [here](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)
 
 ## Running locally
 
