@@ -1,5 +1,7 @@
 package com.pepp.wordreversal
 
+import org.junit.jupiter.api.AfterAll
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.openqa.selenium.By
 import org.openqa.selenium.WebDriver
@@ -10,32 +12,35 @@ import org.openqa.selenium.support.ui.WebDriverWait
 
 class SeleniumTest {
 
+    private val sentence = "Selenium test"
+    private val reversedSentence = "muineleS tset"
+
+    @BeforeEach
+    fun setUp() {
+        driver.get("https://wordreversal.herokuapp.com/")
+    }
+
     @Test
     fun runTest() {
+        val textInput: WebElement = driver.findElement(By.id("sentenceInput"))
+        val submitButton: WebElement = driver.findElement(By.id("postSentence"))
+        textInput.sendKeys(sentence)
 
-        // Create an instance of the driver
-        val driver: WebDriver = ChromeDriver()
+        submitButton.click()
 
-        // Navigate to a web page
-        driver.get("https://wordreversal.herokuapp.com/")
-
-        // Perform actions on HTML elements, entering text and submitting the form
-        val textInput: WebElement = driver.findElement(By.name("w3review"))
-        textInput.sendKeys("Selenium test")
-
-        //passwordElement.submit(); // submit by text input element
-        //formElement.submit() // submit by form element
-
-        // Anticipate web browser response, with an explicit wait
-        val wait = WebDriverWait(driver, 20)
-        val messageElement: WebElement = wait.until(
-                ExpectedConditions.presenceOfElementLocated(By.id("loginResponse"))
+        val wait = WebDriverWait(driver, 2)
+        wait.until(
+                ExpectedConditions.textToBePresentInElement(driver.findElement(By.id("result")), reversedSentence)
         )
+    }
 
-        // Run a test
-        val message: String = messageElement.getText()
+    companion object {
+        private val driver: WebDriver = ChromeDriver()
 
-        // Conclude a test
-        driver.quit()
+        @AfterAll
+        @JvmStatic
+        fun destroy() {
+            driver.quit()
+        }
     }
 }

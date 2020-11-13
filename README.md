@@ -74,13 +74,13 @@ Before you deploy to Heroku you need to build the application jar locally
 ./gradlew clean bootJar
 ```
 
-Finally build and release the container to Heroku using these commands
+Finally build and release the container to Heroku using these commands. Note that this will build the docker container as well, so there is no need to do that separately.
 ```
 heroku container:push web
 heroku container:release web
 ```
 
-Now you can open the app in tour broser using:
+Now you can open the app in your broser using:
 ```
 heroku open
 ```
