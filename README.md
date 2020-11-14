@@ -1,5 +1,14 @@
 # Word reversal
 
+This is a web app for reversing words in sentences. 
+
+It features:
+* React/redux Frontend
+* Kotlin Spring boot backend
+* Docker container for deployment
+* Configuration for deploying on Heroku
+* H2 in memory database for running locally and PostgreSQL for deployment environment
+
 ## Requirements
 
 To develop and run locally you will need:
@@ -24,8 +33,6 @@ npm install
 ```
 
 ## Test
-
-
 
 ### Unit and integration tests
 Run the test suite from your terminal by:
