@@ -15,16 +15,19 @@ class DataSourceConfig {
 
     @Bean
     @Profile("stage")
-    fun postgresDataSource(): DataSource? {
+    fun postgresDataSource(): DataSource {
         val databaseUrl = System.getenv("DATABASE_URL")
-        log.info("Initializing PostgreSQL database: $databaseUrl");
+        log.info("Initializing PostgreSQL database");
 
         try {
             val dbUri = URI(databaseUrl)
 
-            val username = dbUri.userInfo.split(":")[0];
-            val password = dbUri.userInfo.split(":")[1];
+            val userInfo = dbUri.userInfo.split(":")
+            val username = userInfo[0];
+            val password = userInfo[1];
             val dbUrl = "jdbc:postgresql://${dbUri.host}:${dbUri.port}${dbUri.path}";
+
+            log.info("Connecting to database at $dbUrl")
 
             return DataSourceBuilder.create()
                     .driverClassName("org.postgresql.Driver")
@@ -35,7 +38,7 @@ class DataSourceConfig {
 
         } catch (e: URISyntaxException) {
             log.error("Invalid DATABASE_URL: $databaseUrl", e)
-            return null
+            throw e
         }
     }
 

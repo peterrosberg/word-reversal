@@ -3,19 +3,29 @@
 ## Requirements
 
 To develop and run locally you will need:
-* Java JDK version 11 //TODO or 14?
+* Java JDK version 11
 * Node.js version 14.13.0 or later
 * Npm version 6.14.8 or later
 * Gradle
-* Docker
-* "a modern browser"
+* [Docker](https://www.docker.com/get-started)
+* [Chrome web browser](https://www.google.com/chrome/)
 
 For deployment you also need:
 * [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)
 
 ## Setup
 
+Install the required software for developing. Optionally install the deployment requirements if you want to
+do that as well. Download the repository to a local directory and from that directory run
+
+```
+cd frontend
+npm install
+```
+
 ## Test
+
+
 
 ### Unit and integration tests
 Run the test suite from your terminal by:
@@ -28,11 +38,34 @@ Run the test suite from your terminal by:
 First you need to install the selenium chrome driver on your system. 
 Instructions for that is available [here](https://github.com/SeleniumHQ/selenium/wiki/ChromeDriver)
 
+To execute the test using gradle run from the project root:
+```
+./gradlew :selenium:test --tests "com.pepp.wordreversal.SeleniumTest.runTest"
+```
+
 ## Running locally
 
-You have two options running locally, development mode or using docker.
+You have two options running locally, development mode or using docker. When you run locally, the backend will 
+automatically start up a fresh H2 database in memory each time, giving you a clean slate during development.
 
 ### Run local dev environment
+
+Running locally is the best way to test development changes instantly. Locally you will need to start the
+server and the frontend separately, on different ports, but the frontend will proxy requests to the backend
+so that they can run as one anyway (*see the proxy setting in [package.json](./frontend/package.json)*).
+
+To start the backend, simply trigger the bootRun gradle target. Either from the IDEA or with
+```
+./gradlew bootRun
+```
+
+To start the frontend, run npm start from the frontend folder
+```
+cd frontend
+npm start
+```
+
+Now you can view the application in your browser by going to http://localhost:3000
 
 ### Running with Docker
 
@@ -58,6 +91,7 @@ You can now view the app by going to http://localhost:8080 in your browser.
 
 ## Deploying
 
+### Creating your Heroku environment
 To deploy to Heroku, first make sure you have [an account](https://signup.heroku.com/). 
 When you do you can authenticate in your terminal by running:
 ```
@@ -69,7 +103,22 @@ Then create an app using:
 heroku create
 ```
 
-Before you deploy to Heroku you need to build the application jar locally
+You also need to create a PostgreSQL database connected to your app, specifying the plan name
+that you are using. Example way of doing that with the plan *hobby-dev*:
+```
+heroku addons:create heroku-postgresql:hobby-dev
+```
+
+Finally you should set an environment variable to tell the app which environment it is running.
+This will be used to determine the spring profile on start. The app is configured for running in heroku
+with the stage profile. Set it as follows:
+```
+heroku config:set ENVIRONMENT=stage
+```
+
+### Deploy the app
+
+The app is set up do be deployed using docker for maximum portability. Before you deploy to Heroku you need to build the application jar locally
 ```
 ./gradlew clean bootJar
 ```
