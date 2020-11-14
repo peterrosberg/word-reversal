@@ -8,13 +8,10 @@ export async function postSentence(sentence) {
             body: JSON.stringify({sentence:sentence}),
             method: 'POST'
         });
-        console.log(response);
         if (!response.ok) {
             return { error: "Error " + response.status };
         }
-        const responseJson = await response.json();
-        console.log(responseJson);
-        return responseJson;
+        return await response.json();
     } catch (error) {
         throw new Error('Could not post sentence for reversal!\n' + error.message);
     }
@@ -28,14 +25,10 @@ export async function getLatest() {
             },
             method: 'GET'
         });
-        //TODO: Clear logs
-        console.log(response);
         if (!response.ok) {
             return { error: "Error " + response.status };
         }
-        const responseJson = await response.json();
-        console.log(responseJson);
-        return responseJson;
+        return await response.json();
     } catch (error) {
         throw new Error('Could not get latest reversals!\n' + error.message);
     }

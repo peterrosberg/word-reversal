@@ -11,7 +11,6 @@ export const historySlice = createSlice({
     },
     reducers: {
         setHistory: (state, action) => {
-            console.log(action.payload)
             state.isLoaded = true;
             if (action.payload.error) {
                 state.isError = true;
