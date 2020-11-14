@@ -30,7 +30,7 @@ dependencies {
 
 	implementation("org.hibernate:hibernate-core")
 	implementation("com.h2database:h2")
-	runtimeOnly("mysql:mysql-connector-java")
+	runtimeOnly("org.postgresql:postgresql")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")

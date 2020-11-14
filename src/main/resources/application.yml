@@ -2,9 +2,22 @@ spring:
   application:
     name: word-reversal-backend
   profiles:
-    active: ${ENVIRONMENT:stage}
+    active: ${ENVIRONMENT:dev}
   main:
     banner-mode: "off"
 
 server:
-  port : ${PORT:8080}
+  port : 8080
+
+---
+
+spring:
+  profiles:
+    active: stage
+  jpa:
+    generate-ddl: true
+    hibernate.ddl-auto: update
+
+
+server:
+  port : ${PORT}
