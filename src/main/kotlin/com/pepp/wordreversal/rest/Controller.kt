@@ -1,5 +1,6 @@
 package com.pepp.wordreversal.rest
 
+import com.pepp.wordreversal.model.PreviousTranslation
 import com.pepp.wordreversal.model.ReversalInput
 import com.pepp.wordreversal.model.ReversalResult
 import com.pepp.wordreversal.service.MainService
@@ -18,7 +19,7 @@ class Controller(
     }
 
     @GetMapping("/latest")
-    fun wordReversal(): List<String> {
+    fun wordReversal(): List<PreviousTranslation> {
         return mainService.getLastReversals()
     }
 }

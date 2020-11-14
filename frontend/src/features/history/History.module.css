@@ -5,3 +5,18 @@
 .error {
     color: red;
 }
+
+.subLine {
+    color: #555555;
+    font-size: calc(5px + 1vmin);
+}
+
+.original {
+    color: rgb(112, 76, 182);
+}
+
+@media (prefers-color-scheme: dark) {
+    .original {
+        color: yellow;
+    }
+}

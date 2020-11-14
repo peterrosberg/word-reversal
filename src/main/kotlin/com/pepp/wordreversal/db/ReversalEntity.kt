@@ -1,8 +1,7 @@
 package com.pepp.wordreversal.db
 
 import org.hibernate.annotations.CreationTimestamp
-import org.hibernate.annotations.UpdateTimestamp
-import java.time.LocalDateTime
+import java.time.ZonedDateTime
 import javax.persistence.*
 
 @Entity
@@ -21,5 +20,5 @@ data class ReversalEntity(
 
         @CreationTimestamp
         @Column(nullable = false, updatable = false)
-        lateinit var created: LocalDateTime
+        lateinit var created: ZonedDateTime
 }

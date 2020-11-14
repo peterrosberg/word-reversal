@@ -3,6 +3,7 @@ package com.pepp.wordreversal.service
 import com.pepp.wordreversal.db.DatabaseService
 import com.pepp.wordreversal.db.ReversalEntity
 import com.pepp.wordreversal.logic.WordReversalService
+import com.pepp.wordreversal.model.PreviousTranslation
 import com.pepp.wordreversal.model.ReversalInput
 import com.pepp.wordreversal.model.ReversalResult
 import org.springframework.stereotype.Service
@@ -17,13 +18,17 @@ class MainService(
 
         val result = wordReversalService.reverseWords(input.sentence)
 
-        databaseService.save(ReversalEntity(input.sentence, result))
+        if (input.sentence.isNotEmpty()) {
+            databaseService.save(ReversalEntity(input.sentence, result))
+        }
 
         return ReversalResult(result)
     }
 
-    fun getLastReversals(): List<String> {
-        return databaseService.getLatest().map { it.result }
+    fun getLastReversals(): List<PreviousTranslation> {
+        return databaseService.getLatest().map { entity ->
+            PreviousTranslation(result = entity.result, sentence = entity.input, time = entity.created)
+        }
     }
 
 }
