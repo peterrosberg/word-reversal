@@ -24,7 +24,9 @@ export const reversalSlice = createSlice({
 export const { setText } = reversalSlice.actions;
 
 export const reverseSentence = sentence => dispatch => {
-    postSentence(sentence).then(result => dispatch(setText(result)));
+    if (sentence !== "") {
+        postSentence(sentence).then(result => dispatch(setText(result)));
+    }
 };
 
 export const resultText = state => state.reversal.value;
