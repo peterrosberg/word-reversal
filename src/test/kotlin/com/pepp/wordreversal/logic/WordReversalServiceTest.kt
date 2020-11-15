@@ -55,4 +55,28 @@ class WordReversalServiceTest {
         val result = service.reverseWords("Double-letter words are words")
         assertThat(result).isEqualTo("elbuoD-rettel sdrow era sdrow")
     }
+
+    @Test
+    fun `Handling the ' in the english language`() {
+
+        val result = service.reverseWords("It's mine")
+        assertThat(result).isEqualTo("s'tI enim")
+    }
+
+    @Test
+    fun `Handling words with accents`() {
+
+        assertSingleWord("Señor")
+        assertSingleWord("Café")
+        assertSingleWord("soupçon")
+        assertSingleWord("über")
+        assertSingleWord("Zoë")
+        assertSingleWord("entrepôt")
+        assertSingleWord("Đinđić")
+        assertSingleWord("Chișinău")
+    }
+
+    private fun assertSingleWord(input: String) {
+        assertThat(service.reverseWords(input)).`as`("Reversing $input correctly").isEqualTo(input.reversed())
+    }
 }

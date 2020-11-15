@@ -5,8 +5,9 @@ import org.springframework.stereotype.Service
 @Service
 class WordReversalService {
 
-    private val lettersPattern = "[A-Za-zÅÄÖåäö]+".toRegex()
-    private val nonLettersPattern = "[^A-Za-zÅÄÖåäö]+".toRegex()
+    private val characters = "A-Za-zÀ-ÖØ-öø-ƿȖ-ț'"
+    private val lettersPattern = "[$characters]+".toRegex()
+    private val nonLettersPattern = "[^$characters]+".toRegex()
 
     fun reverseWords(input: String): String {
 
