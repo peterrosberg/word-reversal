@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { postSentence } from '../../backend'
+import { postSentence } from '../../backendClient'
 
 export const reversalSlice = createSlice({
     name: 'reversal',

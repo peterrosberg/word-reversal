@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { getLatest } from '../../backend'
+import { getLatest } from '../../backendClient'
 
 export const historySlice = createSlice({
     name: 'history',
