@@ -47,7 +47,7 @@ Instructions for that is available [here](https://github.com/SeleniumHQ/selenium
 
 To execute the test using gradle run from the project root:
 ```
-./gradlew :selenium:test --tests "com.pepp.wordreversal.SeleniumTest.runTest"
+./gradlew :selenium:test --tests "com.wordsmith.wordreversal.SeleniumTest.runTest"
 ```
 
 ## Running locally
