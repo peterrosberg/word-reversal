@@ -9,6 +9,9 @@ spring:
 server:
   port: ${PORT:8080}
 
+reversal:
+  delimitingCharacters: ,.
+
 ---
 
 spring:

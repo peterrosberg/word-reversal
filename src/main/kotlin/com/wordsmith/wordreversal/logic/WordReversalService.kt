@@ -3,11 +3,13 @@ package com.wordsmith.wordreversal.logic
 import org.springframework.stereotype.Service
 
 @Service
-class WordReversalService {
+class WordReversalService(
+        properties: ReversalProperties
+) {
 
-    private val characters = "A-Za-zÀ-ÖØ-öø-ƿȖ-ț'"
-    private val lettersPattern = "[$characters]+".toRegex()
-    private val nonLettersPattern = "[^$characters]+".toRegex()
+    private val delimiters = "\\s${properties.delimitingCharacters}"
+    private val lettersPattern = "[^$delimiters]+".toRegex()
+    private val nonLettersPattern = "[$delimiters]+".toRegex()
 
     fun reverseWords(input: String): String {
 
@@ -26,7 +28,7 @@ class WordReversalService {
             zipListsToString(words, nonWords)
         } else {
             zipListsToString(nonWords, words)
-        }
+        }.trim()
     }
 
     private fun zipListsToString(list1: List<String>, list2: List<String>): String {

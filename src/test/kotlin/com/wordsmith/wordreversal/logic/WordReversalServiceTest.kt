@@ -1,11 +1,27 @@
 package com.wordsmith.wordreversal.logic
 
+import io.mockk.every
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit5.MockKExtension
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.extension.ExtendWith
 
+@ExtendWith(MockKExtension::class)
 class WordReversalServiceTest {
 
-    private val service: WordReversalService = WordReversalService()
+    @MockK
+    lateinit var properties: ReversalProperties
+
+    lateinit var service: WordReversalService
+
+    @BeforeEach
+    fun setUpProperties() {
+        every { properties.delimitingCharacters } returns ".,"
+
+        service = WordReversalService(properties)
+    }
 
     @Test
     fun `Handle empty string`() {
@@ -29,43 +45,50 @@ class WordReversalServiceTest {
     }
 
     @Test
-    fun `Reverses a sentence with odd characters correctly`() {
+    fun `Reverses a sentence with delimiting characters correctly`() {
 
-        val result = service.reverseWords("Hello, this is dog!")
-        assertThat(result).isEqualTo("olleH, siht si god!")
+        val result = service.reverseWords("Hello, this is dog.")
+        assertThat(result).isEqualTo("olleH, siht si god.")
     }
 
     @Test
-    fun `Reverses a sentence starting with odd characters correctly`() {
+    fun `Reverses a sentence with starting with delimiting characters correctly`() {
 
-        val result = service.reverseWords("¿Hello, this is dog?")
-        assertThat(result).isEqualTo("¿olleH, siht si god?")
+        val result = service.reverseWords(".Hello, this is dog")
+        assertThat(result).isEqualTo(".olleH, siht si god")
     }
 
     @Test
-    fun `Reverses a sentence with swedish characters correctly`() {
+    fun `Ignore trailing whitespace`() {
 
-        val result = service.reverseWords("Åke, du är på en Ö")
-        assertThat(result).isEqualTo("ekÅ, ud rä åp ne Ö")
+        val result = service.reverseWords("    Hello, this is dog   \t  ")
+        assertThat(result).isEqualTo("olleH, siht si god")
+    }
+
+    @Test
+    fun `All whitespace are delimiters`() {
+
+        val result = service.reverseWords("Hello\tthis\ris\ndog")
+        assertThat(result).isEqualTo("olleH\tsiht\rsi\ngod")
     }
 
     @Test
     fun `Reverses a sentence with combined words correctly`() {
 
-        val result = service.reverseWords("Double-letter words are words")
-        assertThat(result).isEqualTo("elbuoD-rettel sdrow era sdrow")
+        val result = service.reverseWords("It's a double-trouble")
+        assertThat(result).isEqualTo("s'tI a elbuort-elbuod")
     }
 
     @Test
-    fun `Handling the ' in the english language`() {
+    fun `Odd characters and numbers are reversed`() {
 
-        val result = service.reverseWords("It's mine")
-        assertThat(result).isEqualTo("s'tI enim")
+        assertSingleWord("089-47/'&%!")
     }
 
     @Test
     fun `Handling words with accents`() {
 
+        assertSingleWord("Åke")
         assertSingleWord("Señor")
         assertSingleWord("Café")
         assertSingleWord("soupçon")
