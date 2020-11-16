@@ -1,4 +1,4 @@
-package com.wordsmith.wordreversal.db
+package com.wordsmith.wordreversal.model.entity
 
 import org.hibernate.annotations.CreationTimestamp
 import java.time.ZonedDateTime

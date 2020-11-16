@@ -1,7 +1,7 @@
 package com.wordsmith.wordreversal.service
 
 import com.wordsmith.wordreversal.db.DatabaseService
-import com.wordsmith.wordreversal.db.ReversalEntity
+import com.wordsmith.wordreversal.model.entity.ReversalEntity
 import com.wordsmith.wordreversal.logic.WordReversalService
 import com.wordsmith.wordreversal.model.PreviousTranslation
 import com.wordsmith.wordreversal.model.ReversalInput

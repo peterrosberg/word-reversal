@@ -1,5 +1,6 @@
 package com.wordsmith.wordreversal.db
 
+import com.wordsmith.wordreversal.model.entity.ReversalEntity
 import org.springframework.stereotype.Service
 
 @Service

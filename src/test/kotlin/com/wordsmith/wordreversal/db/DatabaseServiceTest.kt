@@ -1,5 +1,6 @@
 package com.wordsmith.wordreversal.db
 
+import com.wordsmith.wordreversal.model.entity.ReversalEntity
 import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -17,7 +18,7 @@ class DatabaseServiceTest {
     lateinit var databaseService: DatabaseService
 
     @Test
-    fun `Created time is set correctly`() {
+    fun `Created time and id is set correctly`() {
 
         val now = ZonedDateTime.now()
         val entity = ReversalEntity(
