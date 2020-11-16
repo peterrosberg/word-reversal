@@ -1,56 +1,66 @@
 package com.wordsmith.wordreversal.db
 
 import com.wordsmith.wordreversal.model.entity.ReversalEntity
-import org.assertj.core.api.Assertions
+import io.mockk.every
+import io.mockk.impl.annotations.InjectMockKs
+import io.mockk.impl.annotations.MockK
+import io.mockk.junit5.MockKExtension
+import io.mockk.verify
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.ActiveProfiles
-import java.time.ZonedDateTime
-import java.time.temporal.ChronoUnit
+import org.junit.jupiter.api.extension.ExtendWith
 
-@SpringBootTest
-@ActiveProfiles("test")
+@ExtendWith(MockKExtension::class)
 class DatabaseServiceTest {
 
-    @Autowired
+    @MockK
+    lateinit var repository: ReversalRepository
+
+    @InjectMockKs
     lateinit var databaseService: DatabaseService
 
     @Test
-    fun `Created time and id is set correctly`() {
+    fun `Cache last sentences`() {
 
-        val now = ZonedDateTime.now()
         val entity = ReversalEntity(
                 input = "YO!",
                 result = "OY!"
         )
 
+        every { repository.save<ReversalEntity>(any()) } returnsArgument 0
+        every { repository.findTop5ByOrderByCreatedDesc() } returns listOf(entity)
+
+
         databaseService.save(entity)
+        assertThat(databaseService.getLatest()).`as`("Read 1: uncached").containsExactly(entity)
+        assertThat(databaseService.getLatest()).`as`("Read 2: cached").containsExactly(entity)
 
-        val result = databaseService.getLatest()
+        databaseService.save(entity)
+        assertThat(databaseService.getLatest()).`as`("Read 3: uncached").containsExactly(entity)
+        assertThat(databaseService.getLatest()).`as`("Read 4: cached").containsExactly(entity)
 
-        assertThat(result.size).isEqualTo(1)
-        assertThat(result.first().id).isNotEqualTo(0)
-        assertThat(result.first().created).isCloseTo(now, Assertions.within(1, ChronoUnit.SECONDS))
+        verify(exactly = 2) { repository.findTop5ByOrderByCreatedDesc() }
     }
 
     @Test
-    fun `Get the five last sentences`() {
+    fun `Only cache successful fetch`() {
 
-        val tooOldEntity = ReversalEntity(
-                input = "Too Old!",
-                result = "Too Old!"
+        val entity = ReversalEntity(
+                input = "YO!",
+                result = "OY!"
         )
 
-        databaseService.save(tooOldEntity)
+        every { repository.save<ReversalEntity>(any()) } returnsArgument 0
+        every { repository.findTop5ByOrderByCreatedDesc() } throws RuntimeException("TEST") andThen listOf(entity)
 
-        val entities = (1..5).map { ReversalEntity(it.toString(), it.toString()) }
-                .map { databaseService.save(it) }
+        try {
+            databaseService.getLatest()
+        } catch (e: RuntimeException) {
+
+        }
 
         val result = databaseService.getLatest()
 
-        assertThat(result.size).isEqualTo(5)
-        assertThat(result).containsExactlyInAnyOrderElementsOf(entities)
+        assertThat(result).containsExactly(entity)
     }
 }
