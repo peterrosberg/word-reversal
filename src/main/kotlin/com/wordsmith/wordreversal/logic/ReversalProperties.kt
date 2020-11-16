@@ -4,5 +4,5 @@ import org.springframework.boot.context.properties.ConfigurationProperties
 
 @ConfigurationProperties(prefix = "reversal")
 data class ReversalProperties(
-    var delimitingCharacters: String = ""
+        var delimitingCharacters: String = ""
 )

@@ -13,7 +13,7 @@ class WordReversalService(
 
     fun reverseWords(input: String): String {
 
-        if(input.isEmpty()) {
+        if (input.isEmpty()) {
             return ""
         }
 

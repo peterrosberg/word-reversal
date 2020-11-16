@@ -1,10 +1,10 @@
 package com.wordsmith.wordreversal.service
 
 import com.wordsmith.wordreversal.db.DatabaseService
-import com.wordsmith.wordreversal.model.entity.ReversalEntity
 import com.wordsmith.wordreversal.logic.WordReversalService
 import com.wordsmith.wordreversal.model.PreviousTranslation
 import com.wordsmith.wordreversal.model.ReversalInput
+import com.wordsmith.wordreversal.model.entity.ReversalEntity
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK

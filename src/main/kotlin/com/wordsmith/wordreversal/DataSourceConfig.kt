@@ -35,7 +35,6 @@ class DataSourceConfig {
                     .username(username)
                     .password(password)
                     .build()
-
         } catch (e: URISyntaxException) {
             log.error("Invalid DATABASE_URL: $databaseUrl", e)
             throw e

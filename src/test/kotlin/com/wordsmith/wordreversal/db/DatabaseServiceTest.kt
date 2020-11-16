@@ -33,7 +33,6 @@ class DatabaseServiceTest {
         assertThat(result.size).isEqualTo(1)
         assertThat(result.first().id).isNotEqualTo(0)
         assertThat(result.first().created).isCloseTo(now, Assertions.within(1, ChronoUnit.SECONDS))
-
     }
 
     @Test
@@ -53,7 +52,5 @@ class DatabaseServiceTest {
 
         assertThat(result.size).isEqualTo(5)
         assertThat(result).containsExactlyInAnyOrderElementsOf(entities)
-
     }
-
 }

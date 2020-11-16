@@ -1,11 +1,11 @@
 package com.wordsmith.wordreversal.service
 
 import com.wordsmith.wordreversal.db.DatabaseService
-import com.wordsmith.wordreversal.model.entity.ReversalEntity
 import com.wordsmith.wordreversal.logic.WordReversalService
 import com.wordsmith.wordreversal.model.PreviousTranslation
 import com.wordsmith.wordreversal.model.ReversalInput
 import com.wordsmith.wordreversal.model.ReversalResult
+import com.wordsmith.wordreversal.model.entity.ReversalEntity
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,7 +14,7 @@ class MainService(
         val databaseService: DatabaseService
 ) {
 
-    fun reverseWords(input: ReversalInput) : ReversalResult {
+    fun reverseWords(input: ReversalInput): ReversalResult {
 
         val result = wordReversalService.reverseWords(input.sentence)
 
@@ -30,5 +30,4 @@ class MainService(
             PreviousTranslation(result = entity.result, sentence = entity.input, time = entity.created)
         }
     }
-
 }

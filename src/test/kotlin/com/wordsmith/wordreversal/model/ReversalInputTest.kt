@@ -26,7 +26,5 @@ class ReversalInputTest {
         )
 
         assertThat(json.parseObject(jsonInput)).isEqualTo(expected)
-
     }
-
 }

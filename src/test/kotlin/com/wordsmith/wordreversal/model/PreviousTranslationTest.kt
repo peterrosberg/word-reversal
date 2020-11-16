@@ -31,7 +31,5 @@ class PreviousTranslationTest {
         """.trimIndent()
 
         Assertions.assertThat(json.write(result)).isEqualToJson(expectedJson)
-
     }
-
 }

@@ -4,7 +4,7 @@ import com.wordsmith.wordreversal.model.entity.ReversalEntity
 import org.springframework.stereotype.Service
 
 @Service
-class DatabaseService (
+class DatabaseService(
         val repository: ReversalRepository
 ) {
 
@@ -15,5 +15,4 @@ class DatabaseService (
     fun getLatest(): List<ReversalEntity> {
         return repository.findTop5ByOrderByCreatedDesc()
     }
-
 }

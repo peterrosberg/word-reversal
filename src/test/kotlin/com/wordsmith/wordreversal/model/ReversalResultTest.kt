@@ -26,7 +26,5 @@ class ReversalResultTest {
         """.trimIndent()
 
         Assertions.assertThat(json.write(result)).isEqualToJson(expectedJson)
-
     }
-
 }

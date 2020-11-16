@@ -14,11 +14,11 @@ data class ReversalEntity(
         val result: String
 
 ) {
-        @Id
-        @GeneratedValue(strategy = GenerationType.IDENTITY)
-        val id : Long = 0
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    val id: Long = 0
 
-        @CreationTimestamp
-        @Column(nullable = false, updatable = false)
-        lateinit var created: ZonedDateTime
+    @CreationTimestamp
+    @Column(nullable = false, updatable = false)
+    lateinit var created: ZonedDateTime
 }
