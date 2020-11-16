@@ -10,7 +10,7 @@ server:
   port: ${PORT:8080}
 
 reversal:
-  delimitingCharacters: ,.
+  delimitingCharacters: ",."
 
 ---
 

@@ -28,7 +28,7 @@ class MainServiceTest {
     lateinit var service: MainService
 
     @Test
-    fun `reversing a sentence saves to database`() {
+    fun `Reversing a sentence saves to database`() {
 
         val expectedResult = "reversed"
         val input = "sentence"
@@ -44,7 +44,7 @@ class MainServiceTest {
     }
 
     @Test
-    fun `reversing an empty sentence does not save to database`() {
+    fun `Reversing an empty sentence does not save to database`() {
 
         val expectedResult = ""
         val input = ""
@@ -60,7 +60,7 @@ class MainServiceTest {
     }
 
     @Test
-    fun `getting the last translated sentences`() {
+    fun `Getting the last translated sentences`() {
 
         val time1 = ZonedDateTime.now()
         val time2 = time1.minusHours(1L)

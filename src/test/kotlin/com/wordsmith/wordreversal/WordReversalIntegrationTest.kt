@@ -20,15 +20,15 @@ class WordReversalIntegrationTest {
     private lateinit var mockMvc: MockMvc
 
     @Test
-    fun reversesBasicString() {
+    fun `Basic integration test`() {
         mockMvc.perform(
                 post("/api/reversal")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("""{"sentence":"ola salo"}""")
+                        .content("""{"sentence":"ola, salo"}""")
         )
                 .andDo(print())
                 .andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(content().string(containsString("alo olas")))
+                .andExpect(content().string(containsString("alo, olas")))
     }
 }

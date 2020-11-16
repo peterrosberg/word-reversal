@@ -14,7 +14,7 @@ class PreviousTranslationTest {
     private lateinit var json: JacksonTester<PreviousTranslation>
 
     @Test
-    fun `serialisation test`() {
+    fun `Serialisation test`() {
 
         val result = PreviousTranslation(
                 result = "Yes Sentence",

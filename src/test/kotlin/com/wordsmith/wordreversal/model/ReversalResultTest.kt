@@ -13,7 +13,7 @@ class ReversalResultTest {
     private lateinit var json: JacksonTester<ReversalResult>
 
     @Test
-    fun `serialisation test`() {
+    fun `Serialisation test`() {
 
         val result = ReversalResult(
                 result = "Yes Sentence"

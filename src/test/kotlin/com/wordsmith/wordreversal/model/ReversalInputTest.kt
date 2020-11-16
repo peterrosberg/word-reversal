@@ -13,7 +13,7 @@ class ReversalInputTest {
     private lateinit var json: JacksonTester<ReversalInput>
 
     @Test
-    fun `deserialisation test`() {
+    fun `Deserialisation test`() {
 
         val jsonInput = """
             {
