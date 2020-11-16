@@ -35,6 +35,7 @@ npm install
 ## Test
 
 ### Unit and integration tests
+
 Run the test suite from your terminal by:
 ```
 ./gradlew test 
@@ -47,8 +48,12 @@ Instructions for that is available [here](https://github.com/SeleniumHQ/selenium
 
 To execute the test using gradle run from the project root:
 ```
-./gradlew :selenium:test --tests "com.wordsmith.wordreversal.SeleniumTest.runTest"
+cd selenium
+./gradlew test
 ```
+
+Selenium will currently run hardcoded towards the deployment location at https://wordreversal.herokuapp.com/ this 
+should be changed to a staging environment when there is one. 
 
 ## Running locally
 
